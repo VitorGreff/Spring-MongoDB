@@ -2,6 +2,7 @@ package com.greff.mongoworkshop.resources;
 
 import com.greff.mongoworkshop.Services.UserService;
 import com.greff.mongoworkshop.Services.exception.ObjectNotFoundException;
+import com.greff.mongoworkshop.domain.Post;
 import com.greff.mongoworkshop.domain.User;
 import com.greff.mongoworkshop.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,4 +55,12 @@ public class UserResource {
         obj = service.update(obj);
         return ResponseEntity.noContent().build();
     }
+
+    @RequestMapping(value = "/{id}/posts", method = RequestMethod.GET)
+    public ResponseEntity<List<Post>> findPosts(@PathVariable String id){ //diz que o id tem que casar com o da url
+        User user = service.findById(id);
+        return ResponseEntity.ok().body(user.getPosts());
+    }
+
+
 }
