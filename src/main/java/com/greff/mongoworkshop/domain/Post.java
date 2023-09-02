@@ -1,11 +1,14 @@
 package com.greff.mongoworkshop.domain;
 
 import com.greff.mongoworkshop.dto.AuthorDTO;
+import com.greff.mongoworkshop.dto.CommentDTO;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 @Document
@@ -16,6 +19,7 @@ public class Post implements Serializable {
     private String title;
     private String body;
     private AuthorDTO author;
+    private List<CommentDTO> comments = new ArrayList<>();
 
     public Post(){}
 
@@ -25,6 +29,10 @@ public class Post implements Serializable {
         this.title = title;
         this.body = body;
         this.author = author;
+    }
+
+    public List<CommentDTO> getComments() {
+        return comments;
     }
 
     public AuthorDTO getAuthor() {
